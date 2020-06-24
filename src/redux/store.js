@@ -12,16 +12,14 @@ const middlewares = [];
 middlewares.push(sagaMiddleware);
 
 const appReducer = combineReducers({
-    ...reducers,
+  ...reducers,
 });
 
-const rootReducer = (state, action) => {
-    return appReducer(state, action);
-};
+const rootReducer = (state, action) => appReducer(state, action);
 
 const store = createStore(
-    rootReducer,
-    compose(applyMiddleware(...middlewares)),
+  rootReducer,
+  compose(applyMiddleware(...middlewares)),
 );
 sagaMiddleware.run(rootSaga);
 

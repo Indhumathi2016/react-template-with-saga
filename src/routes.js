@@ -1,21 +1,19 @@
 import React from 'react';
-import {Route, Router, Switch} from 'react-router-dom';
-import App from "Components/App";
-import User from "Components/User";
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import App from 'Components/App';
+import User from 'Components/User';
 
-const Routes = ({history}) => {
-    return (
-        <Router history={history}>
-            <Switch>
-                <Route path="/user">
-                    <User/>
-                </Route>
-                <Route path="/">
-                    <App/>
-                </Route>
-            </Switch>
-        </Router>
-    );
-};
+const Routes = () => (
+  <Router>
+    <Switch>
+      <Route exact path="/">
+        <App />
+      </Route>
+      <Route path="/user/:id">
+        <User />
+      </Route>
+    </Switch>
+  </Router>
+);
 
 export default Routes;

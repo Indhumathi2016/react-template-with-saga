@@ -1,14 +1,24 @@
-import React from 'react';
-import logo from '../logo.svg';
+import React, { useEffect } from 'react';
+import { store } from 'redux/store';
+import actions from 'redux/User/actions';
+import { useParams } from 'react-router-dom';
 
 function User() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-            </header>
-        </div>
-    );
+  useEffect(() => {
+    store.dispatch({
+      type: actions.GET_USER,
+    });
+  });
+
+  let { id } = useParams();
+
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>{id}</h1>
+      </header>
+    </div>
+  );
 }
 
 export default User;
