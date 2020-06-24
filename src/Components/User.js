@@ -8,7 +8,7 @@ function User() {
     store.dispatch({
       type: actions.GET_USER,
     });
-  });
+  }, []);
 
   let { id } = useParams();
 
