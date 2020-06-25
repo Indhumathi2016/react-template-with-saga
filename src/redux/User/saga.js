@@ -4,6 +4,7 @@ import actions from './actions';
 import { getRequest } from 'helpers/axiosClient';
 
 export function* getUser() {
+  console.log('coming');
   try {
     const response = yield call(() => getRequest('users'));
     yield put({

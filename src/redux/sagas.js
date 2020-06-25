@@ -4,3 +4,4 @@ import userSaga from './User/saga';
 export default function* rootSaga(getState) {
   yield all([userSaga()]);
 }
+
