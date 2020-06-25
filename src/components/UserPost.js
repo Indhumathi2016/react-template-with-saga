@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { store } from "redux/store";
 import actions from "redux/User/actions";
 import { PostStyles } from "styles/AppStyles.style";
-import { Card } from "antd";
+import { Button, Card } from "antd";
 import AddModal from "components/AddModal";
 import CommentFormFields from "components/CommentFormFileds";
 
@@ -15,7 +15,8 @@ function UserPost(props) {
       comments,
       currentPost,
       isShowModal,
-      isAdding
+      isAdding,
+      isRemovingPost
     } = useSelector(state => state.User),
     { userId, postId } = useParams(),
     [showComment, updateShowComment] = useState(false);
@@ -35,10 +36,25 @@ function UserPost(props) {
   function handleConfirm(values) {
     store.dispatch({ type: actions.ADD_COMMENT, payload: values, postId });
   }
+  function onRemovePost() {
+    store.dispatch({ type: actions.REMOVE_POST, postId, userId });
+  }
 
   return (
     <PostStyles>
-        <CustomHeader title={currentUserName} path={`/users/${userId}`} extra={<div></div>}/>
+      <CustomHeader
+        title={currentUserName}
+        path={`/users/${userId}`}
+        extra={
+          <Button
+            loading={isRemovingPost}
+            type="primary"
+            onClick={onRemovePost}
+          >
+            Remove
+          </Button>
+        }
+      />
       <h1 className={"m-t-20"}>{currentPost.title}</h1>
       <p className={"m-t-20"}>{currentPost.body}</p>
       <div className={"comments"}>

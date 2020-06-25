@@ -4,6 +4,7 @@ import actions from "redux/User/actions";
 import { Link, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Card } from "antd";
+import { RightOutlined } from "@ant-design/icons";
 import { UserStyles } from "styles/AppStyles.style";
 import CustomHeader from "components/CustomHeader";
 import ButtonField from "components/ButtonField";
@@ -55,7 +56,10 @@ function User() {
           <CustomHeader title={userName} path={"/"} extra={<ButtonField />} />
           {userPosts.map((post, index) => (
             <Card key={index} onClick={() => onClickPost(post)}>
-              <Link to={`/users/${id}/post/${post.id}`}>{post.title}</Link>
+              <div className={'post'}>
+                <Link to={`/users/${id}/post/${post.id}`}>{post.title}</Link>{" "}
+                <RightOutlined />
+              </div>
             </Card>
           ))}
           <AddModal

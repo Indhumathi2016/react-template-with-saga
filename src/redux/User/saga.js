@@ -1,7 +1,7 @@
 import { all, call, put, takeEvery } from "redux-saga/effects";
 import { message } from "antd";
 import actions from "./actions";
-import { getRequest, postRequest } from "helpers/axiosClient";
+import {deleteRequest, getRequest, postRequest} from 'helpers/axiosClient';
 
 export function* getUser() {
   try {
@@ -74,6 +74,22 @@ export function* addPost(params) {
     message.error("Something went wrong");
   }
 }
+export function* removePost(params) {
+  try {
+    yield call(() => deleteRequest(`posts/${params.postId}`, params.payload));
+    yield put({
+      type: actions.DELETE_POST_SUCCESS,
+      id: params.postId,
+    });
+    window.location.href = `/users/${params.userId}`;
+    window.reload();
+    yield put({ type: actions.SHOW_COMMENT_MODAL, payload: false });
+    message.success("Post removed successfully");
+  } catch (error) {
+    yield put({ type: actions.DELETE_POST_FAILURE });
+    message.error("Something went wrong");
+  }
+}
 
 export default function* rootSaga() {
   yield all([
@@ -81,6 +97,7 @@ export default function* rootSaga() {
     takeEvery(actions.GET_USER_POSTS, getUserPosts),
     takeEvery(actions.GET_USER_POST_DETAILS, getUserPostsDetails),
     takeEvery(actions.ADD_COMMENT, addComment),
-    takeEvery(actions.ADD_POST, addPost)
+    takeEvery(actions.ADD_POST, addPost),
+    takeEvery(actions.REMOVE_POST, removePost),
   ]);
 }

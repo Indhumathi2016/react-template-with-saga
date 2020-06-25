@@ -11,6 +11,7 @@ const initState = {
   isAdding: false,
   isFetchingUsers: false,
   isFetchingPosts: false,
+  isRemovingPost: false,
 };
 
 export default function userReducer(state = initState, action) {
@@ -91,6 +92,24 @@ export default function userReducer(state = initState, action) {
         ...state,
         isAdding: false
       };
+    case actions.DELETE_POST_SUCCESS:
+      const posts = state.userPosts.filter(user => user.id === action.id);
+      return {
+        ...state,
+        userPosts: posts,
+        isRemovingPost: false
+      }
+    case actions.REMOVE_POST:{
+      return {
+        ...state,
+        isRemovingPost: true,
+      }
+    }
+    case actions.DELETE_POST_FAILURE:
+      return {
+        ...state,
+        isRemovingPost: false,
+      }
     default:
       return state;
   }

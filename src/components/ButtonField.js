@@ -8,7 +8,7 @@ function ButtonField() {
     store.dispatch({ type: actions.SHOW_COMMENT_MODAL, payload: true });
   }
   return (
-    <Button shape="circle" type={"primary"} onClick={onAddPost}>
+    <Button className={'btn-circle'} shape="circle" type={"primary"} onClick={onAddPost}>
       {" "}
       +{" "}
     </Button>

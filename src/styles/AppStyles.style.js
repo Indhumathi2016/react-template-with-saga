@@ -18,7 +18,13 @@ export const LoaderStyles = styled.div`
 `;
 export const UserStyles = styled.div`
   .ant-card {
-    cursor: pointer;
+    a {
+      cursor: pointer;
+    }
+    .post {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 `;
 export const PageHeaderStyles = styled.div`
@@ -29,7 +35,7 @@ export const PageHeaderStyles = styled.div`
   h2 {
     margin-left: 30px;
   }
-  .ant-btn {
+  .btn-circle {
     span {
       color: ${variables.WHITE_COLOR};
       font-size: 19px;
