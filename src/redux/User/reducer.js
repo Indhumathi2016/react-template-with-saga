@@ -2,6 +2,7 @@ import actions from './actions';
 
 const initState = {
   loading: true,
+  users: []
 };
 
 export default function userReducer(state = initState, action) {
@@ -16,6 +17,7 @@ export default function userReducer(state = initState, action) {
       return {
         ...state,
         loading: false,
+        users: action.payload,
       };
     }
     case actions.GET_USER_FAILURE: {
