@@ -1,4 +1,4 @@
-import actions from './actions';
+import actions from "./actions";
 
 const initState = {
   loading: true,
@@ -10,20 +10,20 @@ export default function userReducer(state = initState, action) {
     case actions.GET_USER: {
       return {
         ...state,
-        loading: true,
+        loading: true
       };
     }
     case actions.GET_USER_SUCCESS: {
       return {
         ...state,
         loading: false,
-        users: action.payload,
+        users: action.payload
       };
     }
     case actions.GET_USER_FAILURE: {
       return {
         ...state,
-        loading: false,
+        loading: false
       };
     }
     default:

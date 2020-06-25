@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { store } from 'redux/store';
-import actions from 'redux/User/actions';
-import { useParams } from 'react-router-dom';
-import {useSelector} from 'react-redux';
+import React, { useEffect } from "react";
+import { store } from "redux/store";
+import actions from "redux/User/actions";
+import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function User() {
-  const {users} = useSelector(state => state.User);
+  const { users } = useSelector(state => state.User);
   useEffect(() => {
     store.dispatch({
-      type: actions.GET_USER,
+      type: actions.GET_USER
     });
   }, []);
 
