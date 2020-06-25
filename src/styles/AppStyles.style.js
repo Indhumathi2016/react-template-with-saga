@@ -25,8 +25,15 @@ export const PageHeaderStyles = styled.div`
   display: flex;
   padding: 15px 0;
   align-items: center;
+  justify-content: space-between;
   h2 {
     margin-left: 30px;
+  }
+  .ant-btn {
+    span {
+      color: ${variables.WHITE_COLOR};
+      font-size: 19px;
+    }
   }
 `;
 export const PostStyles = styled.div`

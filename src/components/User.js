@@ -6,12 +6,19 @@ import { useSelector } from "react-redux";
 import { Card } from "antd";
 import { UserStyles } from "styles/AppStyles.style";
 import CustomHeader from "components/CustomHeader";
-import ButtonField from 'components/ButtonField';
-import CommentModal from 'components/CommentModal';
-import PostFormFields from 'components/PostFormFields';
+import ButtonField from "components/ButtonField";
+import AddModal from "components/AddModal";
+import PostFormFields from "components/PostFormFields";
+import Loader from "components/Loader";
 
 function User() {
-  const { userPosts, users, isShowCommentModal, addCommentLoader } = useSelector(state => state.User),
+  const {
+      userPosts,
+      users,
+      isShowModal,
+      isAdding,
+      isFetchingPosts
+    } = useSelector(state => state.User),
     [userName, setUserName] = useState("");
   let { id } = useParams();
 
@@ -33,27 +40,33 @@ function User() {
     store.dispatch({
       type: actions.SET_POST_DETAILS,
       userName,
-        post,
+      post
     });
   }
   function handleConfirm(values) {
-      store.dispatch({type: actions.ADD_POST})
+    store.dispatch({ type: actions.ADD_POST });
   }
   return (
     <UserStyles>
-      <CustomHeader title={userName} path={"/"} extra={<ButtonField />}/>
-      {userPosts.map((post, index) => (
-        <Card key={index} onClick={() => onClickPost(post)}>
-          <Link to={`/users/${id}/post/${post.id}`}>{post.title}</Link>
-        </Card>
-      ))}
-        <CommentModal
-            visible={isShowCommentModal}
+      {isFetchingPosts ? (
+        <Loader />
+      ) : (
+        <>
+          <CustomHeader title={userName} path={"/"} extra={<ButtonField />} />
+          {userPosts.map((post, index) => (
+            <Card key={index} onClick={() => onClickPost(post)}>
+              <Link to={`/users/${id}/post/${post.id}`}>{post.title}</Link>
+            </Card>
+          ))}
+          <AddModal
+            visible={isShowModal}
             title={"Add Post"}
             handleConfirm={handleConfirm}
-            loader={addCommentLoader}
+            loader={isAdding}
             formFields={<PostFormFields />}
-        />
+          />
+        </>
+      )}
     </UserStyles>
   );
 }

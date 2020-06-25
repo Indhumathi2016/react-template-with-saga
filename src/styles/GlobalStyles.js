@@ -52,6 +52,16 @@ body {
 }
 .m-t-20 {
   margin-top: 20px;
+}
+.ant-btn-primary {
+    span {
+      color: ${variables.WHITE_COLOR}
+     }
+}
+.ant-form-item-explain {
+    div{
+      color: ${variables.DANGER_COLOR}
+    }
 }`;
 
 export default GlobalStyles;

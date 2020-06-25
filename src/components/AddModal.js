@@ -3,7 +3,7 @@ import { Button, Form, Modal } from "antd";
 import actions from "redux/User/actions";
 import { store } from "redux/store";
 
-function CommentModal({ visible, title, handleConfirm, loader, formFields }) {
+function AddModal({ visible, title, handleConfirm, loader, formFields }) {
   function handleCancel() {
     store.dispatch({ type: actions.SHOW_COMMENT_MODAL, payload: false });
   }
@@ -35,4 +35,4 @@ function CommentModal({ visible, title, handleConfirm, loader, formFields }) {
     </Modal>
   );
 }
-export default CommentModal;
+export default AddModal;

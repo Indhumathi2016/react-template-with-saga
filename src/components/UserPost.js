@@ -6,7 +6,7 @@ import { store } from "redux/store";
 import actions from "redux/User/actions";
 import { PostStyles } from "styles/AppStyles.style";
 import { Card } from "antd";
-import CommentModal from "components/CommentModal";
+import AddModal from "components/AddModal";
 import CommentFormFields from "components/CommentFormFileds";
 
 function UserPost(props) {
@@ -14,8 +14,8 @@ function UserPost(props) {
       currentUserName,
       comments,
       currentPost,
-      isShowCommentModal,
-      addCommentLoader
+      isShowModal,
+      isAdding
     } = useSelector(state => state.User),
     { userId, postId } = useParams(),
     [showComment, updateShowComment] = useState(false);
@@ -38,7 +38,7 @@ function UserPost(props) {
 
   return (
     <PostStyles>
-      <CustomHeader title={currentUserName} path={`/users/${userId}`} />
+        <CustomHeader title={currentUserName} path={`/users/${userId}`} extra={<div></div>}/>
       <h1 className={"m-t-20"}>{currentPost.title}</h1>
       <p className={"m-t-20"}>{currentPost.body}</p>
       <div className={"comments"}>
@@ -62,11 +62,11 @@ function UserPost(props) {
           ))}
         </>
       )}
-      <CommentModal
-        visible={isShowCommentModal}
+      <AddModal
+        visible={isShowModal}
         title={"Add Comment"}
         handleConfirm={handleConfirm}
-        loader={addCommentLoader}
+        loader={isAdding}
         formFields={<CommentFormFields />}
       />
     </PostStyles>
