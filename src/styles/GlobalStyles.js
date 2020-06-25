@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import variables from 'styles/variables';
+import { createGlobalStyle } from "styled-components";
+import variables from "styles/variables";
 
 const GlobalStyles = createGlobalStyle`
 /********** Add Your Global CSS Here **********/
@@ -49,7 +49,9 @@ code {
 body {
   height: 100%;
   padding: 30px;
-  background: ${variables.WHITE_COLOR};
+}
+.m-t-20 {
+  margin-top: 20px;
 }`;
 
 export default GlobalStyles;
